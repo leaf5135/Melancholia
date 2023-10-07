@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour
 {
+
+    public string text;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,6 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void OpenScene() {
-        SceneManager.LoadScene("SongSelect");
+        SceneManager.LoadScene(text);
     }
 }
