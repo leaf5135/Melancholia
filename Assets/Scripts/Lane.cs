@@ -20,7 +20,7 @@ public class Lane : MonoBehaviour
     {
         get
         {
-            return noteTapY - (noteSpawnY - noteTapY);
+            return noteTapY - (noteSpawnY - noteTapY) + 5;
         }
     }
     public float noteSpawnX;
@@ -29,7 +29,7 @@ public class Lane : MonoBehaviour
     {
         get
         {
-            return noteTapX - (noteSpawnX - noteTapX);
+            return noteTapX - (noteSpawnX - noteTapX) + 5;
         }
     }
     public int direction;
@@ -72,27 +72,30 @@ public class Lane : MonoBehaviour
 
             if (Input.GetKeyDown(input))
             {
+                // Destroy(notes[inputIndex].gameObject);
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
                     Hit();
-                    // print($"Hit on {inputIndex} note");
+                    print($"Hit on {inputIndex} note");
                     Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }
                 else
                 {
-                    // print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
-                    // Destroy(notes[inputIndex].gameObject);
+                    Hit();
+                    print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+                    Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }
             }
             if (timeStamp + marginOfError <= audioTime)
             {
                 Miss();
-                // print($"Missed {inputIndex} note");
+                print($"Missed {inputIndex} note");
                 Destroy(notes[inputIndex].gameObject);
                 inputIndex++;
             }
+            // inputIndex++;
         }
 
     }
