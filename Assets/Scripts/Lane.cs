@@ -6,19 +6,38 @@ using UnityEngine;
 
 public class Lane : MonoBehaviour
 {
+    public Lane Instance;
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
     public KeyCode input;
     public GameObject notePrefab;
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();
-
     int spawnIndex = 0;
     int inputIndex = 0;
+    public float noteSpawnY;
+    public float noteTapY;
+    public float noteDespawnY
+    {
+        get
+        {
+            return noteTapY - (noteSpawnY - noteTapY);
+        }
+    }
+    public float noteSpawnX;
+    public float noteTapX;
+    public float noteDespawnX
+    {
+        get
+        {
+            return noteTapX - (noteSpawnX - noteTapX);
+        }
+    }
+    public int direction;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instance = this;
     }
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
@@ -56,23 +75,26 @@ public class Lane : MonoBehaviour
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
                     Hit();
-                    print($"Hit on {inputIndex} note");
+                    // print($"Hit on {inputIndex} note");
                     Destroy(notes[inputIndex].gameObject);
                     inputIndex++;
                 }
                 else
                 {
-                    print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+                    // print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+                    // Destroy(notes[inputIndex].gameObject);
+                    inputIndex++;
                 }
             }
             if (timeStamp + marginOfError <= audioTime)
             {
                 Miss();
-                print($"Missed {inputIndex} note");
+                // print($"Missed {inputIndex} note");
+                Destroy(notes[inputIndex].gameObject);
                 inputIndex++;
             }
-        }       
-    
+        }
+
     }
     private void Hit()
     {
