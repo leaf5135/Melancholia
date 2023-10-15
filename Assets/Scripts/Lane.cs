@@ -14,13 +14,14 @@ public class Lane : MonoBehaviour
     public List<double> timeStamps = new List<double>();
     int spawnIndex = 0;
     int inputIndex = 0;
+    public float despawnOffset;
     public float noteSpawnY;
     public float noteTapY;
     public float noteDespawnY
     {
         get
         {
-            return noteTapY - (noteSpawnY - noteTapY) + 5;
+            return noteTapY - (noteSpawnY - noteTapY) + despawnOffset;
         }
     }
     public float noteSpawnX;
@@ -29,7 +30,7 @@ public class Lane : MonoBehaviour
     {
         get
         {
-            return noteTapX - (noteSpawnX - noteTapX) + 5;
+            return noteTapX - (noteSpawnX - noteTapX) + despawnOffset;
         }
     }
     public int direction;
@@ -53,55 +54,130 @@ public class Lane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleNoteSpawning();
+        HandleNoteInput();
+    }
+
+    void HandleNoteSpawning()
+    {
         if (spawnIndex < timeStamps.Count)
         {
-            if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
+            double audioTime = SongManager.GetAudioSourceTime();
+            double nextNoteTime = timeStamps[spawnIndex] - SongManager.Instance.noteTime;
+
+            if (audioTime >= nextNoteTime)
             {
-                var note = Instantiate(notePrefab, transform);
-                notes.Add(note.GetComponent<Note>());
-                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex];
-                spawnIndex++;
+                SpawnNote();
             }
         }
+    }
 
+    void SpawnNote()
+    {
+        var note = Instantiate(notePrefab, transform);
+        notes.Add(note.GetComponent<Note>());
+        Note noteComponent = note.GetComponent<Note>();
+        noteComponent.assignedTime = (float)timeStamps[spawnIndex];
+        spawnIndex++;
+    }
+
+    void HandleNoteInput()
+    {
         if (inputIndex < timeStamps.Count)
         {
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = SongManager.Instance.marginOfError;
             double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
 
+            bool hitProcessed = false; // Flag to track if a hit has been processed
+
             if (Input.GetKeyDown(input))
             {
-                // Destroy(notes[inputIndex].gameObject);
-                if (Math.Abs(audioTime - timeStamp) < marginOfError)
+                hitProcessed = true;
+                HandleNoteHit(timeStamp, marginOfError, audioTime);
+            }
+            else if (!hitProcessed && timeStamp + marginOfError <= audioTime)
+            {
+                HandleNoteMiss(timeStamp, marginOfError, audioTime);
+            }
+        }
+    }
+
+    void HandleNoteHit(double timeStamp, double marginOfError, double audioTime)
+    {
+        double delay = Math.Abs(audioTime - timeStamp);
+        if (delay <= marginOfError)
+        {
+            // Create a list to store indices of notes to be destroyed
+            List<int> notesToDestroy = new List<int>();
+
+            for (int i = inputIndex; i < notes.Count; i++)
+            {
+                double noteTime = notes[i].assignedTime;
+
+                // Check if the note's time is within the specified range
+                if (Math.Abs(audioTime - noteTime) <= 0.25)
                 {
-                    Hit();
-                    print($"Hit on {inputIndex} note");
-                    Destroy(notes[inputIndex].gameObject);
-                    inputIndex++;
+                    notesToDestroy.Add(i);
                 }
                 else
                 {
-                    Hit();
-                    print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
-                    Destroy(notes[inputIndex].gameObject);
-                    inputIndex++;
+                    break; // Exit the loop if we're outside the timestamp range
                 }
             }
-            if (timeStamp + marginOfError <= audioTime)
+
+            // Destroy notes within the range
+            foreach (int index in notesToDestroy)
             {
-                Miss();
-                print($"Missed {inputIndex} note");
-                Destroy(notes[inputIndex].gameObject);
-                inputIndex++;
+                try {
+                    Destroy(notes[index].gameObject);
+                }
+                catch (MissingReferenceException ex)
+                {
+                    print($"Skipped a deleted note: {ex.Message}");
+                }
             }
-            // inputIndex++;
+
+            // Update the inputIndex to the next unprocessed note
+            inputIndex = Mathf.Max(inputIndex, notesToDestroy.Count);
+            Hit();
+            print($"Hit on {inputIndex} note");
+        }
+        else
+        {
+            if (delay <= 2 * marginOfError) // Register as an inaccurate hit
+            {
+                InaccurateHit();
+                print($"Hit inaccurate on {inputIndex} note with {delay} delay");
+            }
+            else // Anything outside the margin of error range is a miss
+            {
+                HandleNoteMiss(timeStamp, marginOfError, audioTime);
+            }
+        }
+    }
+    void HandleNoteMiss(double timeStamp, double marginOfError, double audioTime)
+    {
+        try
+        {
+            if (timeStamp + marginOfError <= audioTime) {
+                Destroy(notes[inputIndex++].gameObject);
+            }
+            Miss();
+            print($"Missed {inputIndex} note");
+        }
+        catch (MissingReferenceException ex)
+        {
+            print($"Skipped a deleted note: {ex.Message}");
         }
 
     }
     private void Hit()
     {
         ScoreManager.Hit();
+    }
+    private void InaccurateHit() {
+        ScoreManager.InaccurateHit();
     }
     private void Miss()
     {
