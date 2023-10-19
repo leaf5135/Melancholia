@@ -685,7 +685,7 @@ MonoBehaviour:
   input: 100
   notePrefab: {fileID: 1534850418514208906, guid: cb66269e26c2bfb498343333a80c9f71, type: 3}
   timeStamps: []
-  despawnOffset: -1
+  despawnOffset: -3
   noteSpawnY: 7
   noteTapY: 0
   noteSpawnX: 0
@@ -740,7 +740,7 @@ MonoBehaviour:
   input: 115
   notePrefab: {fileID: 6401272534080061571, guid: 2cf803e342afadc43a269f4f908a85e6, type: 3}
   timeStamps: []
-  despawnOffset: -1
+  despawnOffset: -3
   noteSpawnY: 7
   noteTapY: 0
   noteSpawnX: 0
@@ -1031,7 +1031,7 @@ MonoBehaviour:
   input: 119
   notePrefab: {fileID: 4003208864679534659, guid: f7e541ce6622ffd46b07c1ff0b6e67a1, type: 3}
   timeStamps: []
-  despawnOffset: -1
+  despawnOffset: -3
   noteSpawnY: 7
   noteTapY: 0
   noteSpawnX: 0
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   input: 97
   notePrefab: {fileID: 1679635116095923819, guid: cd03512b1e543774494edc21cd857a66, type: 3}
   timeStamps: []
-  despawnOffset: -1
+  despawnOffset: -3
   noteSpawnY: 7
   noteTapY: 0
   noteSpawnX: 0
