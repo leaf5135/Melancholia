@@ -174,13 +174,13 @@ public class Lane : MonoBehaviour
     }
     private void Hit()
     {
-        ScoreManager.Hit();
+        StatsManager.Hit();
     }
     private void InaccurateHit() {
-        ScoreManager.InaccurateHit();
+        StatsManager.InaccurateHit();
     }
     private void Miss()
     {
-        ScoreManager.Miss();
+        StatsManager.Miss();
     }
 }
