@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class StatsManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
+    public static StatsManager Instance;
     public AudioSource hitSFX;
     public AudioSource inaccuratehitSFX;
     public AudioSource missSFX;
