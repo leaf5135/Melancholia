@@ -10,6 +10,7 @@ public class StatsManager : MonoBehaviour
     public AudioSource inaccuratehitSFX;
     public AudioSource missSFX;
     public TMPro.TextMeshPro scoreText;
+    public TMPro.TextMeshPro comboText;
     static int combo;
     static int score;
     static int health;
@@ -46,5 +47,6 @@ public class StatsManager : MonoBehaviour
     private void Update()
     {
         scoreText.text = score.ToString();
+        comboText.text = combo.ToString();
     }
 }
