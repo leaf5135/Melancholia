@@ -34,7 +34,12 @@ public class StatsManager : MonoBehaviour
         }
     }
     public static void InaccurateHit() {
+        combo = 0;
         Instance.inaccuratehitSFX.Play();
+        int dmg  = rnd.Next(1, 8);
+        if (dmg <= 4) {
+            health -= 1;
+        }
     }
     public static void Miss()
     {
