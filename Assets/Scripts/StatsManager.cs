@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StatsManager : MonoBehaviour
 {
     public static StatsManager Instance;
+    public static HealthBar bar;
     public AudioSource hitSFX;
     public AudioSource inaccuratehitSFX;
     public AudioSource missSFX;
@@ -14,13 +15,27 @@ public class StatsManager : MonoBehaviour
     public TMPro.TextMeshPro comboText;
     static int combo;
     static int score;
-    static int health;
+    public int maxHealth = 25;
+    public int health;
     void Start()
     {
         Instance = this;
         combo = 0;
         score = 0;
-        health = 25;
+        health = maxHealth;
+
+        // Find the HealthBar component in the scene
+        bar = FindObjectOfType<HealthBar>();
+
+        if (bar != null)
+        {
+            // Set the max health on the HealthBar
+            bar.SetMaxHealth(health);
+        }
+        else
+        {
+            Debug.LogError("HealthBar not found in the scene!");
+        }
     }
     public static void Hit()
     {
@@ -31,14 +46,17 @@ public class StatsManager : MonoBehaviour
         int regen  = rnd.Next(1, 25);
         if (regen < 5) {
             health += 1;
+            bar.SetHealth(health);
         }
     }
     public static void InaccurateHit() {
         combo = 0;
         Instance.inaccuratehitSFX.Play();
+        System.Random rnd = new System.Random();
         int dmg  = rnd.Next(1, 8);
         if (dmg <= 4) {
             health -= 1;
+            bar.SetHealth(health);
         }
     }
     public static void Miss()
@@ -48,6 +66,7 @@ public class StatsManager : MonoBehaviour
             score -= 1;
         }
         health -= 4;
+        bar.SetHealth(health);
         Instance.missSFX.Play();
     }
     private void Update()
