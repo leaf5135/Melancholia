@@ -10,18 +10,16 @@ public class StatsManager : MonoBehaviour
     public AudioSource hitSFX;
     public AudioSource inaccuratehitSFX;
     public AudioSource missSFX;
+    public HealthBar healthBar;
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro comboText;
     static int combo;
     static int score;
-    static int health;
-    private int maxHealth = 25;
     void Start()
     {
         Instance = this;
         combo = 0;
         score = 0;
-        health = maxHealth;
     }
     public static void Hit()
     {
@@ -30,8 +28,8 @@ public class StatsManager : MonoBehaviour
         Instance.hitSFX.Play();
         System.Random rnd = new System.Random();
         int regen  = rnd.Next(1, 25);
-        if (regen < 5) {
-            health += 1;
+        if (Instance.healthBar.getMaxHealth() - Instance.healthBar.getCurrentHealth() >= 1) {
+            Instance.healthBar.updateHealth(1);
         }
     }
     public static void InaccurateHit() {
@@ -39,14 +37,16 @@ public class StatsManager : MonoBehaviour
         Instance.inaccuratehitSFX.Play();
         System.Random rnd = new System.Random();
         int dmg  = rnd.Next(1, 8);
-        if (dmg <= 4) {
-            health -= 1;
+        if (Instance.healthBar.getCurrentHealth() > 0) {
+            Instance.healthBar.updateHealth(-1);
         }
     }
     public static void Miss()
     {
         combo = 0;
-        health -= 4;
+        if (Instance.healthBar.getCurrentHealth() > 0) {
+            Instance.healthBar.updateHealth(-4);
+        }
         Instance.missSFX.Play();
     }
     private void Update()
