@@ -25,21 +25,16 @@ public class StatsManager : MonoBehaviour
     {
         combo += 1;
         score += 1;
-        Instance.hitSFX.Play();
-        System.Random rnd = new System.Random();
-        int regen  = rnd.Next(1, 25);
         if (Instance.healthBar.getMaxHealth() - Instance.healthBar.getCurrentHealth() >= 1) {
             Instance.healthBar.updateHealth(1);
         }
+        Instance.hitSFX.Play();
     }
     public static void InaccurateHit() {
-        combo = 0;
-        Instance.inaccuratehitSFX.Play();
-        System.Random rnd = new System.Random();
-        int dmg  = rnd.Next(1, 8);
         if (Instance.healthBar.getCurrentHealth() > 0) {
             Instance.healthBar.updateHealth(-1);
         }
+        Instance.inaccuratehitSFX.Play();
     }
     public static void Miss()
     {
