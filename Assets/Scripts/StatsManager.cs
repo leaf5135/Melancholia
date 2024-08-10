@@ -13,6 +13,7 @@ public class StatsManager : MonoBehaviour
     public HealthBar healthBar;
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro comboText;
+    public TMPro.TextMeshPro hpText;
     static int combo;
     static int score;
     static float health;
@@ -62,7 +63,8 @@ public class StatsManager : MonoBehaviour
     }
     private void Update()
     {
-        scoreText.text = "Score - " + score.ToString();
-        comboText.text = "Combo - " + combo.ToString();
+        scoreText.text = "Score: " + score.ToString();
+        comboText.text = "Combo: " + combo.ToString();
+        hpText.text = "HP: " + health.ToString("F0");
     }
 }
