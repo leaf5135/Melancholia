@@ -23,6 +23,12 @@ public class HealthBar : MonoBehaviour
         return maxHealth;
     }
 
+    public void setHealth(float health) {
+        currentHealth = health;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        updateHealthBar();
+    }
+
     public void updateHealth(float amount) {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);

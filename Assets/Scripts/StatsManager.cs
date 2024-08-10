@@ -15,34 +15,50 @@ public class StatsManager : MonoBehaviour
     public TMPro.TextMeshPro comboText;
     static int combo;
     static int score;
+    static float health;
     void Start()
     {
         Instance = this;
         combo = 0;
         score = 0;
+        health = Instance.healthBar.getMaxHealth();
     }
     public static void Hit()
     {
         combo += 1;
         score += 1;
         if (Instance.healthBar.getMaxHealth() - Instance.healthBar.getCurrentHealth() >= 1) {
-            Instance.healthBar.updateHealth(1);
+            health += 1;
+            health = Mathf.Clamp(health, 0, Instance.healthBar.getMaxHealth());
+            Instance.healthBar.setHealth(health);
         }
         Instance.hitSFX.Play();
     }
     public static void InaccurateHit() {
         if (Instance.healthBar.getCurrentHealth() > 0) {
-            Instance.healthBar.updateHealth(-1);
+            health -= 1;
+            health = Mathf.Clamp(health, 0, Instance.healthBar.getMaxHealth());
+            Instance.healthBar.setHealth(health);
         }
         Instance.inaccuratehitSFX.Play();
+
+        if (health == 0) {
+            print("GAME OVER LOL");
+        }
     }
     public static void Miss()
     {
         combo = 0;
         if (Instance.healthBar.getCurrentHealth() > 0) {
-            Instance.healthBar.updateHealth(-4);
+            health -= 4;
+            health = Mathf.Clamp(health, 0, Instance.healthBar.getMaxHealth());
+            Instance.healthBar.setHealth(health);
         }
         Instance.missSFX.Play();
+
+        if (health == 0) {
+            print("GAME OVER LOL");
+        }
     }
     private void Update()
     {
