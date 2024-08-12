@@ -232,10 +232,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1869519216}
-  - {fileID: 2073587299}
-  - {fileID: 1856990797}
   - {fileID: 1441840088}
+  - {fileID: 1856990797}
   - {fileID: 633316278}
+  - {fileID: 2073587299}
   - {fileID: 1535704623}
   - {fileID: 18088343}
   - {fileID: 1066620510}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 633316278}
   - component: {fileID: 633316277}
   m_Layer: 0
-  m_Name: Lane (East)
+  m_Name: Lane (Left)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,7 +794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Instance: {fileID: 0}
   noteRestriction: 9
-  input: 122
+  input: 276
   notePrefab: {fileID: 1534850418514208906, guid: 9043eb2d71628404d9dfdc92d43fc48c, type: 3}
   timeStamps: []
   despawnOffset: 9
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 1441840088}
   - component: {fileID: 1441840087}
   m_Layer: 0
-  m_Name: Lane (South)
+  m_Name: Lane (Up)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Instance: {fileID: 0}
   noteRestriction: 6
-  input: 120
+  input: 273
   notePrefab: {fileID: 6401272534080061571, guid: a043c4f729c0ef1429ea13081611a298, type: 3}
   timeStamps: []
   despawnOffset: 9
@@ -1569,7 +1569,7 @@ MonoBehaviour:
   songDelayInSeconds: 0
   marginOfError: 0.25
   inputDelayInMilliseconds: 500
-  fileLocation: littleroot.mid
+  fileLocation: chrollo.mid
   noteTime: 1
 --- !u!4 &1787680573
 Transform:
@@ -1596,7 +1596,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 765092527e14e4eafb9fc23734c2be6e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 04c3eacd0bc5c4fbcb7feacda91beb13, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1693,7 +1693,7 @@ GameObject:
   - component: {fileID: 1856990797}
   - component: {fileID: 1856990796}
   m_Layer: 0
-  m_Name: Lane (North)
+  m_Name: Lane (Down)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Instance: {fileID: 0}
   noteRestriction: 3
-  input: 110
+  input: 274
   notePrefab: {fileID: 4003208864679534659, guid: b93f007ca30546343b6fb9f22a218a42, type: 3}
   timeStamps: []
   despawnOffset: 9
@@ -2005,7 +2005,7 @@ GameObject:
   - component: {fileID: 2073587299}
   - component: {fileID: 2073587298}
   m_Layer: 0
-  m_Name: Lane (West)
+  m_Name: Lane (Right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2025,7 +2025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Instance: {fileID: 0}
   noteRestriction: 0
-  input: 109
+  input: 275
   notePrefab: {fileID: 1679635116095923819, guid: cc28a87238983584da68d44f3dd25845, type: 3}
   timeStamps: []
   despawnOffset: 9
