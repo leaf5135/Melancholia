@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HealthBar : MonoBehaviour
 {
     private float maxHealth = 25;
     private float currentHealth;
     [SerializeField] private Image healthBarFill;
+    [SerializeField] private float fillSpeed;
 
     void Start()
     {
@@ -37,6 +39,6 @@ public class HealthBar : MonoBehaviour
 
     private void updateHealthBar() {
         float targetFillAmount = currentHealth / maxHealth;
-        healthBarFill.fillAmount = targetFillAmount;
+        healthBarFill.DOFillAmount(targetFillAmount, fillSpeed);
     }
 }

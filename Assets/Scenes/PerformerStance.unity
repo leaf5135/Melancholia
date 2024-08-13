@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarFill: {fileID: 629206403}
+  fillSpeed: 0.5
 --- !u!114 &9680522
 MonoBehaviour:
   m_ObjectHideFlags: 0
