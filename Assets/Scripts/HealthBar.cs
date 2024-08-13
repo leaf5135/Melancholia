@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
     private float currentHealth;
     [SerializeField] private Image healthBarFill;
     [SerializeField] private float fillSpeed;
+    [SerializeField] private Gradient colorGradient;
 
     void Start()
     {
@@ -40,5 +41,6 @@ public class HealthBar : MonoBehaviour
     private void updateHealthBar() {
         float targetFillAmount = currentHealth / maxHealth;
         healthBarFill.DOFillAmount(targetFillAmount, fillSpeed);
+        healthBarFill.DOColor(colorGradient.Evaluate(targetFillAmount), fillSpeed);
     }
 }
