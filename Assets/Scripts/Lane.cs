@@ -141,14 +141,14 @@ public class Lane : MonoBehaviour
             // Update the inputIndex to the next unprocessed note
             inputIndex = Mathf.Max(inputIndex, notesToDestroy.Count);
             Hit();
-            print($"Hit on {inputIndex} note");
+            // print($"Hit on {inputIndex} note");
         }
         else
         {
             if (delay <= 2 * marginOfError) // Register as an inaccurate hit
             {
                 InaccurateHit();
-                print($"Hit inaccurate on {inputIndex} note with {delay} delay");
+                // print($"Hit inaccurate on {inputIndex} note with {delay} delay");
             }
             else // Anything outside the margin of error range is a miss
             {
@@ -164,7 +164,7 @@ public class Lane : MonoBehaviour
                 Destroy(notes[inputIndex++].gameObject);
             }
             Miss();
-            print($"Missed {inputIndex} note");
+            // print($"Missed {inputIndex} note");
         }
         catch (MissingReferenceException ex)
         {

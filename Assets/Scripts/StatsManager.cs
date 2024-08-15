@@ -11,16 +11,15 @@ public class StatsManager : MonoBehaviour
     public AudioSource inaccuratehitSFX;
     public AudioSource missSFX;
     public HealthBar healthBar;
-    public TextMeshPro scoreText;
     public TextMeshPro comboText;
+    public TextMeshPro scoreText;
     public TextMeshPro hpText;
 
     private static int combo;
     private static int score;
     private static float health;
-    private bool isInGracePeriod = true;
-    private int elapsed = 0;
-    private Color flashColor = new Color(255, 255, 255, 0.5f);
+    private bool shieldActive;
+    private int shieldTimeRemaining = 0;
     private bool flash = false;
 
     void Start()
@@ -29,23 +28,33 @@ public class StatsManager : MonoBehaviour
         combo = 0;
         score = 0;
         health = Instance.healthBar.getMaxHealth();
-        StartCoroutine(GracePeriodCoroutine());
+        ActivateShield(5);
     }
 
-    private IEnumerator GracePeriodCoroutine()
+    public void ActivateShield(int duration)
     {
-        while (elapsed < 10)
+        StartCoroutine(ShieldCoroutine(duration));
+
+    }
+
+    private IEnumerator ShieldCoroutine(int duration)
+    {
+        shieldActive = true;
+        print("shield activated");
+        int counter = duration * 2;
+        while (counter > 0)
         {
-            elapsed += 1;
+            shieldTimeRemaining = counter / 2;
+            counter -= 1;
             flash = !flash;
             yield return new WaitForSeconds(0.5f);
         }
 
-        isInGracePeriod = false;
+        shieldActive = false;
+        print("shield no longer active");
         scoreText.color = Color.white;
         comboText.color = Color.white;
         hpText.color = Color.white;
-        print("GRACE PERIOD OVER");
     }
     public static void Hit()
     {
@@ -57,9 +66,11 @@ public class StatsManager : MonoBehaviour
             Instance.healthBar.setHealth(health);
         }
         Instance.hitSFX.Play();
+
+        if (score % 50 == 0) Instance.ActivateShield(5);
     }
     public static void InaccurateHit() {
-        if (Instance.isInGracePeriod) return;
+        if (Instance.shieldActive) return;
 
         if (Instance.healthBar.getCurrentHealth() > 0) {
             health -= 1;
@@ -74,7 +85,7 @@ public class StatsManager : MonoBehaviour
     }
     public static void Miss()
     {
-        if (Instance.isInGracePeriod) return;
+        if (Instance.shieldActive) return;
 
         combo = 0;
         if (Instance.healthBar.getCurrentHealth() > 0) {
@@ -94,12 +105,14 @@ public class StatsManager : MonoBehaviour
         comboText.text = "Combo: " + combo.ToString();
         hpText.text = "HP: " + health.ToString("F0");
 
-        if (isInGracePeriod)
+        if (shieldActive)
         {
-            scoreText.color = flash ? flashColor : Color.white;
-            comboText.color = flash ? flashColor : Color.white;
-            hpText.color = flash ? flashColor : Color.white;
-            hpText.text = "Grace: " + (5 - elapsed/2) + "s";
+            Color flashDim = new Color(200 / 255f, 150 / 255f, 250 / 255f, 0.5f);
+            Color flashLit = new Color(200 / 255f, 150 / 255f, 250 / 255f, 1.0f);
+            scoreText.color = flash ? flashDim : flashLit;
+            comboText.color = flash ? flashDim : flashLit;
+            hpText.color = flash ? flashDim : flashLit;
+            hpText.text = "SHIELD: " + shieldTimeRemaining + "s";
         }
     }
 }
