@@ -12,12 +12,12 @@ public class Menu : MonoBehaviour
 
     public void OpenAbout()
     {
-        print("open about");
+        string url = "https://andrewdiep1.github.io/gdc-web/";
+        Application.OpenURL(url);
     }
 
     public void QuitGame()
     {
-        print("quitting game...");
         Application.Quit();
     }
 }
