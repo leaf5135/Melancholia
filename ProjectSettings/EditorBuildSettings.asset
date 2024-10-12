@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/WIP/RhythmGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/WIP/SongSelect.unity
+    path: Assets/Scenes/SongSelect.unity
     guid: 175a78b6dcce2c143968943a6d534bf7
   - enabled: 1
     path: Assets/Scenes/Menu.unity
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DummyLevel.unity
     guid: 043ace9844d504597b48a6d8897366bc
+  - enabled: 1
+    path: Assets/Scenes/FinalFantasyLevel.unity
+    guid: 67b29e22785204547a266edb2adbad29
   m_configObjects: {}
