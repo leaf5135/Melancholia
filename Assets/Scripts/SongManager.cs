@@ -83,6 +83,10 @@ public class SongManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Pause.isPaused) {
+            audioSource.Pause();
+        } else {
+            audioSource.UnPause();
+        }
     }
 }
