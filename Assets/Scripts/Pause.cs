@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
+    public GameObject userInterface;
     public GameObject pauseMenu;
-    public GameObject notes;
     public static bool isPaused;
     public KeyCode pauseKey;
 
@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
-        notes.SetActive(false);
+        userInterface.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -44,7 +44,7 @@ public class Pause : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        notes.SetActive(true);
+        userInterface.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
     }
