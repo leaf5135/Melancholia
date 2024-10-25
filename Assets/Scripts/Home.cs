@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("DummyLevel");
+        SceneManager.LoadScene("Scenes/Template/ConductorStance");
     }
 
     public void OpenAbout()
