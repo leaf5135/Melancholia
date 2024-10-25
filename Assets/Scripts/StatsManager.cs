@@ -14,6 +14,7 @@ public class StatsManager : MonoBehaviour
     public TextMeshPro comboText;
     public TextMeshPro scoreText;
     public TextMeshPro hpText;
+    public static bool gameOver;
 
     private static int combo;
     private static int score;
@@ -25,6 +26,7 @@ public class StatsManager : MonoBehaviour
     void Start()
     {
         Instance = this;
+        gameOver = false;
         combo = 0;
         score = 0;
         health = Instance.healthBar.getMaxHealth();
@@ -34,7 +36,6 @@ public class StatsManager : MonoBehaviour
     public void ActivateShield(int duration)
     {
         StartCoroutine(ShieldCoroutine(duration));
-
     }
 
     private IEnumerator ShieldCoroutine(int duration)
@@ -79,9 +80,10 @@ public class StatsManager : MonoBehaviour
         }
         Instance.inaccuratehitSFX.Play();
 
-        // if (health == 0) {
-        //     print("GAME OVER");
-        // }
+        if (health <= 0) {
+            print("GAME OVER");
+            gameOver = true;
+        }
     }
     public static void Miss()
     {
@@ -95,9 +97,10 @@ public class StatsManager : MonoBehaviour
         }
         Instance.missSFX.Play();
 
-        // if (health == 0) {
-        //     print("GAME OVER");
-        // }
+        if (health <= 0) {
+            print("GAME OVER");
+            gameOver = true;
+        }
     }
     private void Update()
     {
