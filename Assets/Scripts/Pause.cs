@@ -74,6 +74,12 @@ public class Pause : MonoBehaviour
 
     public void GameOver()
     {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    private IEnumerator GameOverRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
         userInterface.SetActive(false);
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(true);

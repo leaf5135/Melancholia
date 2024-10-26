@@ -1855,6 +1855,7 @@ MonoBehaviour:
   userInterface: {fileID: 1739951657}
   pauseMenu: {fileID: 1466435508}
   gameOverMenu: {fileID: 1016333480}
+  fadePanel: {fileID: 0}
   pauseKey: 32
 --- !u!1 &1272912606
 GameObject:
