@@ -5,15 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour
 {
-
-    public SpriteRenderer sr;
     public List<Sprite> albums = new List<Sprite>();
     public List<AudioClip> clips = new List<AudioClip>();
-    public AudioSource audioSource;
-    private int selectedScene = 0;
-    private int selectedSong = 0;
-    public GameObject songAlbum;
+    public SpriteRenderer spriteRenderer;
 
+    private AudioSource audioSource;
+    private int selectedScene;
+    private int selectedSong;
+
+    void Start()
+    {
+        print("album count: " + albums.Count);
+        print("clips count: " + clips.Count);
+
+        selectedScene = 0;
+        selectedSong = 0;
+
+        // Initialize to the first album and audio clip
+        if (albums.Count > 0 && clips.Count > 0)
+        {
+            spriteRenderer.sprite = albums[0];
+            audioSource = GetComponent<AudioSource>();
+            audioSource.clip = clips[0];
+            audioSource.Play();
+            Debug.Log($"Playing {audioSource.clip.name}");
+        }
+        else
+        {
+            Debug.LogWarning("Albums or clips list is empty.");
+        }
+    }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Z)) {
@@ -25,11 +46,8 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void nextSong() {
-        print("album count: " + albums.Count);
-        print("clips count: " + clips.Count);
-
         selectedSong = (selectedSong + 1) % albums.Count;
-        sr.sprite = albums[selectedSong];
+        spriteRenderer.sprite = albums[selectedSong];
 
         selectedScene = (selectedScene + 1) % clips.Count;
         audioSource.clip = clips[selectedScene];
@@ -39,11 +57,8 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void backSong() {
-        print("album count: " + albums.Count);
-        print("clips count: " + clips.Count);
-
         selectedSong = (selectedSong - 1 + albums.Count) % albums.Count;
-        sr.sprite = albums[selectedSong];
+        spriteRenderer.sprite = albums[selectedSong];
 
         selectedScene = (selectedScene - 1 + clips.Count) % clips.Count;
         audioSource.clip = clips[selectedScene];
@@ -51,9 +66,8 @@ public class LevelSelect : MonoBehaviour
         audioSource.Play();
     }
 
-    // Start is called before the first frame update
-    public void PlayGame(){
-        Debug.Log(sr.sprite.name);
-        SceneManager.LoadScene(sr.sprite.name);
+    public void PlayGame() {
+        Debug.Log(spriteRenderer.sprite.name);
+        SceneManager.LoadScene(spriteRenderer.sprite.name);
     }
 }
