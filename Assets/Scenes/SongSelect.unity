@@ -452,6 +452,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c59a9032fd9bc2f4683cd7dbbe2cd757, type: 3}
   - {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
   - {fileID: 21300000, guid: 80b15db53dd2db04ca5d12515c9522fb, type: 3}
+  clips:
+  - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
+  - {fileID: 8300000, guid: 04c3eacd0bc5c4fbcb7feacda91beb13, type: 3}
+  - {fileID: 8300000, guid: 71fbaf9846f227d4681291957bcb5c62, type: 3}
+  - {fileID: 8300000, guid: 765092527e14e4eafb9fc23734c2be6e, type: 3}
+  audioSource: {fileID: 0}
   songAlbum: {fileID: 1184810035}
 --- !u!4 &506328042
 Transform:
@@ -1548,7 +1554,6 @@ GameObject:
   - component: {fileID: 2143378051}
   - component: {fileID: 2143378050}
   - component: {fileID: 2143378049}
-  - component: {fileID: 2143378048}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -1576,21 +1581,6 @@ RectTransform:
   m_AnchoredPosition: {x: -266, y: -191}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2143378048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143378046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47424cb2f9e517a42adb4112aa12b0a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sr: {fileID: 0}
-  albums: []
-  songAlbum: {fileID: 0}
 --- !u!114 &2143378049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,7 +1627,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 506328041}
         m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
-        m_MethodName: BackOption
+        m_MethodName: backSong
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
