@@ -197,7 +197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
+  m_AnchoredPosition: {x: 0, y: -300}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124217097
@@ -1515,7 +1515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010577568
@@ -1624,7 +1624,7 @@ GameObject:
   - component: {fileID: 1016333483}
   - component: {fileID: 1016333482}
   m_Layer: 5
-  m_Name: GameOverMenu
+  m_Name: EndGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1855,8 +1855,7 @@ MonoBehaviour:
   userInterface: {fileID: 1739951657}
   pauseMenu: {fileID: 1466435508}
   gameOverMenu: {fileID: 1016333480}
-  fadePanel: {fileID: 0}
-  pauseKey: 32
+  gameResults: {fileID: 1634824410}
 --- !u!1 &1272912606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,7 +2081,7 @@ GameObject:
   - component: {fileID: 1634824411}
   - component: {fileID: 1634824410}
   m_Layer: 5
-  m_Name: GameOverText
+  m_Name: EndGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2105,7 +2104,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634824410
 MonoBehaviour:
@@ -2127,7 +2126,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME OVER
+  m_text: END GAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 576fa11fd701cb44aa0bf6166b43f7cd, type: 2}
   m_sharedMaterial: {fileID: -7413139264598710756, guid: 576fa11fd701cb44aa0bf6166b43f7cd, type: 2}
