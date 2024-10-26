@@ -67,7 +67,10 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void PlayGame() {
-        Debug.Log(spriteRenderer.sprite.name);
-        SceneManager.LoadScene(spriteRenderer.sprite.name);
+        // Construct the scene name based on the selectedScene index
+        // string sceneToLoad = "Scenes/Level/" + selectedScene;
+        string sceneToLoad = "Scenes/Halloween/" + selectedScene;
+        Debug.Log("Loading scene: " + sceneToLoad);
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

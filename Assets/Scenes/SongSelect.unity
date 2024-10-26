@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next Song (X)
+  m_text: Next Song
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 576fa11fd701cb44aa0bf6166b43f7cd, type: 2}
   m_sharedMaterial: {fileID: -7413139264598710756, guid: 576fa11fd701cb44aa0bf6166b43f7cd, type: 2}
@@ -448,10 +448,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   albums:
-  - {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
-  - {fileID: 21300000, guid: c59a9032fd9bc2f4683cd7dbbe2cd757, type: 3}
   - {fileID: 7482667652216324306, guid: e2522a69028176b45b31ff16100bbae3, type: 3}
-  - {fileID: 21300000, guid: 80b15db53dd2db04ca5d12515c9522fb, type: 3}
+  - {fileID: 7482667652216324306, guid: e2522a69028176b45b31ff16100bbae3, type: 3}
+  - {fileID: 7482667652216324306, guid: e2522a69028176b45b31ff16100bbae3, type: 3}
+  - {fileID: 7482667652216324306, guid: e2522a69028176b45b31ff16100bbae3, type: 3}
   clips:
   - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
   - {fileID: 8300000, guid: 04c3eacd0bc5c4fbcb7feacda91beb13, type: 3}
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back Song (Z)
+  m_text: Back Song
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 576fa11fd701cb44aa0bf6166b43f7cd, type: 2}
   m_sharedMaterial: {fileID: -7413139264598710756, guid: 576fa11fd701cb44aa0bf6166b43f7cd, type: 2}
