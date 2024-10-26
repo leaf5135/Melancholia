@@ -14,11 +14,12 @@ public class StatsManager : MonoBehaviour
     public TextMeshPro comboText;
     public TextMeshPro scoreText;
     public TextMeshPro hpText;
+
+    public static int combo;
+    public static int score;
+    public static float health;
     public static bool gameOver;
 
-    private static int combo;
-    private static int score;
-    private static float health;
     private bool shieldActive;
     private int shieldTimeRemaining = 0;
     private bool flash = false;
@@ -26,11 +27,11 @@ public class StatsManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        gameOver = false;
         combo = 0;
         score = 0;
         health = Instance.healthBar.getMaxHealth();
-        ActivateShield(5);
+        gameOver = false;
+        ActivateShield(3);
     }
 
     public void ActivateShield(int duration)
@@ -57,8 +58,11 @@ public class StatsManager : MonoBehaviour
         comboText.color = Color.white;
         hpText.color = Color.white;
     }
+
     public static void Hit()
     {
+        if (gameOver) return;
+
         combo += 1;
         score += 1;
         if (Instance.healthBar.getMaxHealth() - Instance.healthBar.getCurrentHealth() >= 1) {
@@ -70,8 +74,10 @@ public class StatsManager : MonoBehaviour
 
         if (score % 50 == 0) Instance.ActivateShield(5);
     }
-    public static void InaccurateHit() {
-        if (Instance.shieldActive) return;
+
+    public static void InaccurateHit()
+    {
+        if (gameOver || Instance.shieldActive) return;
 
         if (Instance.healthBar.getCurrentHealth() > 0) {
             health -= 1;
@@ -81,13 +87,13 @@ public class StatsManager : MonoBehaviour
         Instance.inaccuratehitSFX.Play();
 
         if (health <= 0) {
-            print("GAME OVER");
             gameOver = true;
         }
     }
+
     public static void Miss()
     {
-        if (Instance.shieldActive) return;
+        if (gameOver || Instance.shieldActive) return;
 
         combo = 0;
         if (Instance.healthBar.getCurrentHealth() > 0) {
@@ -98,10 +104,10 @@ public class StatsManager : MonoBehaviour
         Instance.missSFX.Play();
 
         if (health <= 0) {
-            print("GAME OVER");
             gameOver = true;
         }
     }
+
     private void Update()
     {
         scoreText.text = "Score: " + score.ToString();

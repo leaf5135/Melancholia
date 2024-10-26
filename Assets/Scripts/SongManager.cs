@@ -19,12 +19,13 @@ public class SongManager : MonoBehaviour
 
     public string fileLocation;
     public float noteTime;
-
+    public static bool songFinished;
     public static MidiFile midiFile;
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+        songFinished = false;
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
             StartCoroutine(ReadFromWebsite());
@@ -75,6 +76,7 @@ public class SongManager : MonoBehaviour
     public void StartSong()
     {
         audioSource.Play();
+        print("song length: " + audioSource.clip.length);
     }
     public static double GetAudioSourceTime()
     {
@@ -87,6 +89,13 @@ public class SongManager : MonoBehaviour
             audioSource.Pause();
         } else {
             audioSource.UnPause();
+        }
+
+        // print("difference: " + (audioSource.clip.length - audioSource.time));
+        if (audioSource.time >= audioSource.clip.length)
+        {
+            songFinished = true;
+            audioSource.Stop();
         }
     }
 }

@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Pause : MonoBehaviour
 {
     public GameObject userInterface;
     public GameObject pauseMenu;
     public GameObject gameOverMenu;
+    public TextMeshProUGUI gameResults;
     public static bool isPaused;
-    public KeyCode pauseKey;
 
     // Start is called before the first frame update
     void Start()
     {
-        userInterface.SetActive(true);
-        isPaused = false;
-        pauseMenu.SetActive(false);
-        gameOverMenu.SetActive(false);
+        ResumeGame();
     }
 
     // Update is called once per frame
@@ -25,9 +23,13 @@ public class Pause : MonoBehaviour
     {
         if (StatsManager.gameOver)
         {
-            GameOver();
+            EndGame(false);
         }
-        else if (Input.GetKeyDown(pauseKey))
+        else if (SongManager.songFinished)
+        {
+            EndGame(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!isPaused)
             {
@@ -40,50 +42,65 @@ public class Pause : MonoBehaviour
         }
     }
 
-    public void PauseGame()
-    {
-        userInterface.SetActive(false);
-        pauseMenu.SetActive(true);
-        gameOverMenu.SetActive(false);
-        Time.timeScale = 0f;
-        isPaused = true;
-    }
-
     public void ResumeGame()
     {
+        isPaused = false;
         userInterface.SetActive(true);
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         Time.timeScale = 1f;
-        isPaused = false;
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        userInterface.SetActive(false);
+        pauseMenu.SetActive(true);
+        gameOverMenu.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void RestartGame()
     {
-        Time.timeScale = 1f;
-        isPaused = false;
+        ResumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ReturnHome()
     {
-        Time.timeScale = 1f;
-        isPaused = false;
+        ResumeGame();
         SceneManager.LoadScene("Home");
     }
 
-    public void GameOver()
+    public void EndGame(bool win)
     {
-        StartCoroutine(GameOverRoutine());
+        if (win)
+        {
+            print("LEVEL COMPLETE");
+            gameResults.text = "LEVEL COMPLETE\n\n" +
+                                "<size=50>Score: " + StatsManager.score.ToString() + "</size>\n" +
+                                "<size=50>Combo: " + StatsManager.combo.ToString() + "</size>";
+
+        }
+        else
+        {
+            print("GAME OVER");
+            gameResults.text = "GAME OVER\n\n" +
+                                "<size=50>Score: " + StatsManager.score.ToString() + "</size>\n" +
+                                "<size=50>Combo: " + StatsManager.combo.ToString() + "</size>";
+
+        }
+
+        StartCoroutine(EndGameRoutine());
     }
 
-    private IEnumerator GameOverRoutine()
+    private IEnumerator EndGameRoutine()
     {
+        isPaused = true;
         yield return new WaitForSeconds(0.5f);
         userInterface.SetActive(false);
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
     }
 }
