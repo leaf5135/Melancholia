@@ -453,10 +453,10 @@ MonoBehaviour:
   - {fileID: 7482667652216324306, guid: e2522a69028176b45b31ff16100bbae3, type: 3}
   - {fileID: 7482667652216324306, guid: e2522a69028176b45b31ff16100bbae3, type: 3}
   clips:
-  - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
-  - {fileID: 8300000, guid: 04c3eacd0bc5c4fbcb7feacda91beb13, type: 3}
-  - {fileID: 8300000, guid: 71fbaf9846f227d4681291957bcb5c62, type: 3}
-  - {fileID: 8300000, guid: 765092527e14e4eafb9fc23734c2be6e, type: 3}
+  - {fileID: 8300000, guid: c41ac90ded07245d0a57ce703d71b839, type: 3}
+  - {fileID: 8300000, guid: e2a931b709a9441a981bbeec2460ade3, type: 3}
+  - {fileID: 8300000, guid: 56ea16a6f35324448b4db1d21b922b2c, type: 3}
+  - {fileID: 8300000, guid: c95d8b1e99e204e75a354f7d490d2127, type: 3}
   spriteRenderer: {fileID: 1184810036}
 --- !u!4 &506328042
 Transform:
