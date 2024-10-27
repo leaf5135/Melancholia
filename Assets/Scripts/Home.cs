@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    private AudioSource homeTheme;
+
+    public void Start()
+    {
+        homeTheme = GetComponent<AudioSource>();
+        homeTheme.Play();
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene("Scenes/SongSelect");
