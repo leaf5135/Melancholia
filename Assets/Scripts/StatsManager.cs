@@ -72,7 +72,7 @@ public class StatsManager : MonoBehaviour
         }
         Instance.hitSFX.Play();
 
-        if (score % 50 == 0) Instance.ActivateShield(2);
+        if (score % 50 == 0) Instance.ActivateShield(3);
     }
 
     public static void InaccurateHit()
