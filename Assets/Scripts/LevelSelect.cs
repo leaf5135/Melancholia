@@ -8,8 +8,8 @@ public class LevelSelect : MonoBehaviour
     public List<Sprite> albums = new List<Sprite>();
     public List<AudioClip> clips = new List<AudioClip>();
     public SpriteRenderer spriteRenderer;
+    public AudioSource audioSource;
 
-    private AudioSource audioSource;
     private int selectedScene;
     private int selectedSong;
 
@@ -37,6 +37,10 @@ public class LevelSelect : MonoBehaviour
     }
 
     void Update() {
+        if (albums.Count <= 0 || clips.Count <= 0) {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.X)) {
             nextSong();
         }
@@ -52,7 +56,7 @@ public class LevelSelect : MonoBehaviour
         selectedScene = (selectedScene + 1) % clips.Count;
         audioSource.clip = clips[selectedScene];
 
-        Debug.Log($"Playing {audioSource.clip.name}");
+        Debug.Log($"Playing {selectedSong}: {audioSource.clip.name}");
         audioSource.Play();
     }
 
@@ -62,15 +66,14 @@ public class LevelSelect : MonoBehaviour
 
         selectedScene = (selectedScene - 1 + clips.Count) % clips.Count;
         audioSource.clip = clips[selectedScene];
-        Debug.Log($"Playing {audioSource.clip.name}");
+        Debug.Log($"Playing {selectedSong}: {audioSource.clip.name}");
         audioSource.Play();
     }
 
     public void PlayGame() {
         // Construct the scene name based on the selectedScene index
         // string sceneToLoad = "Scenes/Level/" + selectedScene;
-        string sceneToLoad = "Scenes/Halloween/" + selectedScene;
-        Debug.Log("Loading scene: " + sceneToLoad);
-        SceneManager.LoadScene(sceneToLoad);
+        // Debug.Log("Loading scene: " + sceneToLoad);
+        // SceneManager.LoadScene(sceneToLoad);
     }
 }
