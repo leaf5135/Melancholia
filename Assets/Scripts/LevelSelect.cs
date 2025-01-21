@@ -17,13 +17,11 @@ public class LevelSelect : MonoBehaviour
 
     void Start()
     {
-        print("album count: " + albums.Count);
-        print("clips count: " + clips.Count);
         print("levels count: " + levels.Count);
         selectedLevel = 0;
 
         // Initialize to the first album and audio clip
-        if (albums.Count > 0 && clips.Count > 0)
+        if (albums.Count > 0 && clips.Count > 0 && levels.Count > 0)
         {
             spriteRenderer.sprite = albums[0];
             audioSource = GetComponent<AudioSource>();
@@ -34,7 +32,7 @@ public class LevelSelect : MonoBehaviour
     }
 
     void Update() {
-        if (albums.Count <= 0 || clips.Count <= 0) {
+        if (albums.Count <= 0 || clips.Count <= 0 || levels.Count <= 0) {
             return;
         }
 
@@ -44,13 +42,13 @@ public class LevelSelect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) {
             backSong();
         }
+
+        levelText.text = "Level " + selectedLevel.ToString();
     }
 
     public void nextSong() {
-        selectedLevel = (selectedLevel + 1) % albums.Count;
+        selectedLevel = (selectedLevel + 1) % levels.Count;
         spriteRenderer.sprite = albums[selectedLevel];
-
-        selectedLevel = (selectedLevel + 1) % clips.Count;
         audioSource.clip = clips[selectedLevel];
 
         Debug.Log($"Playing {audioSource.clip.name}");
@@ -58,11 +56,10 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void backSong() {
-        selectedLevel = (selectedLevel - 1 + albums.Count) % albums.Count;
+        selectedLevel = (selectedLevel - 1 + levels.Count) % levels.Count;
         spriteRenderer.sprite = albums[selectedLevel];
-
-        selectedLevel = (selectedLevel - 1 + clips.Count) % clips.Count;
         audioSource.clip = clips[selectedLevel];
+
         Debug.Log($"Playing {audioSource.clip.name}");
         audioSource.Play();
     }
