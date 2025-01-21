@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelSelect : MonoBehaviour
 {
     public List<Sprite> albums = new List<Sprite>();
     public List<AudioClip> clips = new List<AudioClip>();
+    public List<string> levels = new List<string>();
     public SpriteRenderer spriteRenderer;
     public AudioSource audioSource;
+    public TextMeshPro levelText;
 
-    private int selectedScene;
-    private int selectedSong;
+    private int selectedLevel;
 
     void Start()
     {
         print("album count: " + albums.Count);
         print("clips count: " + clips.Count);
-
-        selectedScene = 0;
-        selectedSong = 0;
+        print("levels count: " + levels.Count);
+        selectedLevel = 0;
 
         // Initialize to the first album and audio clip
         if (albums.Count > 0 && clips.Count > 0)
@@ -29,10 +30,6 @@ public class LevelSelect : MonoBehaviour
             audioSource.clip = clips[0];
             audioSource.Play();
             Debug.Log($"Playing {audioSource.clip.name}");
-        }
-        else
-        {
-            Debug.LogWarning("Albums or clips list is empty.");
         }
     }
 
@@ -50,29 +47,28 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void nextSong() {
-        selectedSong = (selectedSong + 1) % albums.Count;
-        spriteRenderer.sprite = albums[selectedSong];
+        selectedLevel = (selectedLevel + 1) % albums.Count;
+        spriteRenderer.sprite = albums[selectedLevel];
 
-        selectedScene = (selectedScene + 1) % clips.Count;
-        audioSource.clip = clips[selectedScene];
+        selectedLevel = (selectedLevel + 1) % clips.Count;
+        audioSource.clip = clips[selectedLevel];
 
-        Debug.Log($"Playing {selectedSong}: {audioSource.clip.name}");
+        Debug.Log($"Playing {audioSource.clip.name}");
         audioSource.Play();
     }
 
     public void backSong() {
-        selectedSong = (selectedSong - 1 + albums.Count) % albums.Count;
-        spriteRenderer.sprite = albums[selectedSong];
+        selectedLevel = (selectedLevel - 1 + albums.Count) % albums.Count;
+        spriteRenderer.sprite = albums[selectedLevel];
 
-        selectedScene = (selectedScene - 1 + clips.Count) % clips.Count;
-        audioSource.clip = clips[selectedScene];
-        Debug.Log($"Playing {selectedSong}: {audioSource.clip.name}");
+        selectedLevel = (selectedLevel - 1 + clips.Count) % clips.Count;
+        audioSource.clip = clips[selectedLevel];
+        Debug.Log($"Playing {audioSource.clip.name}");
         audioSource.Play();
     }
 
     public void PlayGame() {
-        // Construct the scene name based on the selectedScene index
-        // string sceneToLoad = "Scenes/Level/" + selectedScene;
+        // string sceneToLoad = "Scenes/Level/" + selectedLevel;
         // Debug.Log("Loading scene: " + sceneToLoad);
         // SceneManager.LoadScene(sceneToLoad);
     }

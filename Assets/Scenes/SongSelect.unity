@@ -469,8 +469,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
   - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
   - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
+  levels:
+  - hai
+  - hai
+  - hai
+  - hai
+  - hai
+  - hai
+  - hai
+  - hai
+  - hai
+  - hai
   spriteRenderer: {fileID: 1184810036}
   audioSource: {fileID: 506328043}
+  levelText: {fileID: 0}
 --- !u!4 &506328042
 Transform:
   m_ObjectHideFlags: 0
@@ -722,9 +734,9 @@ RectTransform:
   - {fileID: 6730533}
   m_Father: {fileID: 1569681884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 277, y: -180}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -123, y: -180}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &800445782
@@ -1712,8 +1724,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   albums: []
   clips: []
+  levels: []
   spriteRenderer: {fileID: 0}
   audioSource: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!114 &2143378049
 MonoBehaviour:
   m_ObjectHideFlags: 0
