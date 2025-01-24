@@ -11,7 +11,7 @@ public class LevelSelect : MonoBehaviour
     public List<string> levels = new List<string>();
     public SpriteRenderer spriteRenderer;
     public AudioSource audioSource;
-    public TextMeshPro levelText;
+    public TextMeshProUGUI levelText;
 
     private int selectedLevel;
 
@@ -43,7 +43,7 @@ public class LevelSelect : MonoBehaviour
             backSong();
         }
 
-        levelText.text = "Level " + selectedLevel.ToString();
+        levelText.text = "Level " + levels[selectedLevel];
     }
 
     public void nextSong() {
