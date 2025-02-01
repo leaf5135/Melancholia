@@ -32,6 +32,10 @@ public class LevelSelect : MonoBehaviour
     }
 
     void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SceneManager.LoadScene("Home");
+        }
+
         if (albums.Count <= 0 || clips.Count <= 0 || levels.Count <= 0) {
             return;
         }
