@@ -448,14 +448,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   albums:
-  - {fileID: 21300000, guid: c59a9032fd9bc2f4683cd7dbbe2cd757, type: 3}
-  - {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
-  - {fileID: 21300000, guid: c59a9032fd9bc2f4683cd7dbbe2cd757, type: 3}
-  - {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
-  - {fileID: 21300000, guid: c59a9032fd9bc2f4683cd7dbbe2cd757, type: 3}
-  - {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
-  - {fileID: 21300000, guid: c59a9032fd9bc2f4683cd7dbbe2cd757, type: 3}
-  - {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
+  - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
   - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
   - {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
   clips:
@@ -470,16 +470,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
   - {fileID: 8300000, guid: 7f9949d7297be3343ab21986547fefff, type: 3}
   levels:
-  - hai 1
-  - hai 2
-  - hai 3
-  - hai 4
-  - hai 5
-  - hai 6
-  - hai 7
-  - hai 8
-  - hai 9
-  - hai 10
+  - one
+  - two
+  - three
+  - four
+  - five
+  - six
+  - seven
+  - eight
+  - nine
+  - ten
   spriteRenderer: {fileID: 1184810036}
   audioSource: {fileID: 506328043}
   levelText: {fileID: 1280619879}
@@ -891,7 +891,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
-  m_Sprite: {fileID: 21300000, guid: d21f5823fedabf84c83105c733a35778, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87bc37911d1c8f641b2c558c995a44d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -912,7 +912,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.18, y: 1.9837, z: 0}
-  m_LocalScale: {x: 1.0592525, y: 1.0074, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
