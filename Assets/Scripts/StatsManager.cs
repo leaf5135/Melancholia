@@ -11,14 +11,18 @@ public class StatsManager : MonoBehaviour
     public AudioSource inaccuratehitSFX;
     public AudioSource missSFX;
     public HealthBar healthBar;
+    public ShieldMeter shieldMeter;
     public TextMeshPro comboText;
     public TextMeshPro scoreText;
     public TextMeshPro hpText;
+    public TextMeshPro meterText;
 
     public static int combo;
     public static int score;
     public static float health;
     public static bool gameOver;
+    public static float meter;
+    public static bool isMeterFull = false;
 
     private bool shieldActive;
     private int shieldTimeRemaining = 0;
@@ -29,6 +33,7 @@ public class StatsManager : MonoBehaviour
         Instance = this;
         combo = 0;
         score = 0;
+        meter = 0;
         health = Instance.healthBar.getMaxHealth();
         gameOver = false;
         ActivateShield(3);
@@ -57,6 +62,7 @@ public class StatsManager : MonoBehaviour
         scoreText.color = Color.white;
         comboText.color = Color.white;
         hpText.color = Color.white;
+        meterText.color = Color.white;
     }
 
     public static void Hit()
@@ -72,7 +78,15 @@ public class StatsManager : MonoBehaviour
         }
         Instance.hitSFX.Play();
 
-        if (score % 50 == 0) Instance.ActivateShield(3);
+        if (Instance.shieldMeter.getCurrentMeterValue() < Instance.shieldMeter.getMaxMeterValue()) {
+            meter += 1;
+            meter = Mathf.Clamp(meter, 0, Instance.shieldMeter.getMaxMeterValue());
+            Instance.shieldMeter.setMeterValue(meter);
+
+            if (meter >= 50) {
+                isMeterFull = true;
+            }
+        }
     }
 
     public static void InaccurateHit()
@@ -113,6 +127,11 @@ public class StatsManager : MonoBehaviour
         scoreText.text = "Score: " + score.ToString();
         comboText.text = "Combo: " + combo.ToString();
         hpText.text = "HP: " + health.ToString("F0");
+        if (isMeterFull) {
+            meterText.text = "ACTIVATE (P)";
+        } else {
+            meterText.text = "Shield Meter";
+        }
 
         if (shieldActive)
         {
@@ -121,7 +140,8 @@ public class StatsManager : MonoBehaviour
             scoreText.color = flash ? flashDim : flashLit;
             comboText.color = flash ? flashDim : flashLit;
             hpText.color = flash ? flashDim : flashLit;
-            hpText.text = "SHIELD: " + shieldTimeRemaining + "s";
+            meterText.color = flash ? flashDim : flashLit;
+            meterText.text = "SHIELD: " + shieldTimeRemaining + "s";;
         }
     }
 }
