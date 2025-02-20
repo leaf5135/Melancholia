@@ -133,6 +133,14 @@ public class StatsManager : MonoBehaviour
             meterText.text = "Shield Meter";
         }
 
+        if (Input.GetKeyDown(KeyCode.P) && isMeterFull) {
+            ActivateShield(3);
+            meter = 0;
+            meter = Mathf.Clamp(meter, 0, Instance.shieldMeter.getMaxMeterValue());
+            Instance.shieldMeter.setMeterValue(meter);
+            isMeterFull = false;
+        }
+
         if (shieldActive)
         {
             Color flashDim = new Color(200 / 255f, 150 / 255f, 250 / 255f, 0.5f);
