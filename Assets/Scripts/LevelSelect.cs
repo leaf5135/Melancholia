@@ -43,11 +43,14 @@ public class LevelSelect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X)) {
             nextSong();
         }
-        if (Input.GetKeyDown(KeyCode.Z)) {
+        else if (Input.GetKeyDown(KeyCode.Z)) {
             backSong();
         }
+        else if (Input.GetKeyDown(KeyCode.Space)) {
+            PlayGame();
+        }
 
-        levelText.text = "Level " + levels[selectedLevel];
+        levelText.text = levels[selectedLevel];
     }
 
     public void nextSong() {
@@ -69,8 +72,8 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void PlayGame() {
-        // string sceneToLoad = "Scenes/Level/" + selectedLevel;
-        // Debug.Log("Loading scene: " + sceneToLoad);
-        // SceneManager.LoadScene(sceneToLoad);
+        string sceneToLoad = "Scenes/Level/" + selectedLevel;
+        Debug.Log("Loading scene: " + sceneToLoad);
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

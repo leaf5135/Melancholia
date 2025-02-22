@@ -12,15 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SongSelect.unity
     guid: 175a78b6dcce2c143968943a6d534bf7
   - enabled: 1
-    path: Assets/Scenes/Halloween/0.unity
-    guid: e42fce93cef424073a7c9d8ecbb64e85
+    path: Assets/Scenes/Level/0.unity
+    guid: 4281d4f85742247bab379019bfbc90c2
   - enabled: 1
-    path: Assets/Scenes/Halloween/1.unity
-    guid: cc0797934cc7746eb8d931378716122e
-  - enabled: 1
-    path: Assets/Scenes/Halloween/2.unity
-    guid: bfa9a845adf2d49a9a99bdba55798ff4
-  - enabled: 1
-    path: Assets/Scenes/Halloween/3.unity
-    guid: 1d01a2a09d0cd41dc97bc2211371bbb9
+    path: Assets/Scenes/Level/1.unity
+    guid: 326db1849f6584f21a2a1d42dee4301b
   m_configObjects: {}
