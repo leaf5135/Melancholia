@@ -97,7 +97,7 @@ public class Pause : MonoBehaviour
     private IEnumerator EndGameRoutine()
     {
         isPaused = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.33f);
         userInterface.SetActive(false);
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(true);
