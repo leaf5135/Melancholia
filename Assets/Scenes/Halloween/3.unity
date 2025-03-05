@@ -1760,7 +1760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &914381507
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1989,9 +1989,11 @@ MonoBehaviour:
   inaccuratehitSFX: {fileID: 1472293297}
   missSFX: {fileID: 1212380363}
   healthBar: {fileID: 9680521}
+  shieldMeter: {fileID: 0}
   comboText: {fileID: 1535704621}
   scoreText: {fileID: 18088341}
   hpText: {fileID: 392107083}
+  meterText: {fileID: 0}
 --- !u!4 &1058064140
 Transform:
   m_ObjectHideFlags: 0
@@ -2588,7 +2590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1427958056
 RectTransform:
   m_ObjectHideFlags: 0
