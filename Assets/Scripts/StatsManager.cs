@@ -17,6 +17,7 @@ public class StatsManager : MonoBehaviour
     public TextMeshPro hpText;
     public TextMeshPro meterText;
 
+    public static int maxCombo;
     public static int combo;
     public static int score;
     public static float health;
@@ -31,6 +32,7 @@ public class StatsManager : MonoBehaviour
     void Start()
     {
         Instance = this;
+        maxCombo = 0;
         combo = 0;
         score = 0;
         meter = 0;
@@ -71,6 +73,9 @@ public class StatsManager : MonoBehaviour
 
         combo += 1;
         score += 1;
+        if (combo > maxCombo) {
+            maxCombo = combo;
+        }
         if (Instance.healthBar.getMaxHealth() - Instance.healthBar.getCurrentHealth() >= 1) {
             health += 1;
             health = Mathf.Clamp(health, 0, Instance.healthBar.getMaxHealth());

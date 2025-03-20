@@ -78,17 +78,15 @@ public class Pause : MonoBehaviour
         {
             print("LEVEL COMPLETE");
             gameResults.text = "LEVEL COMPLETE\n\n" +
-                                "<size=50>Score: " + StatsManager.score.ToString() + "</size>\n" +
-                                "<size=50>Combo: " + StatsManager.combo.ToString() + "</size>";
-
+                                "<size=50>Max Combo: " + StatsManager.maxCombo.ToString() + "</size>\n" +
+                                "<size=50>Score: " + StatsManager.score.ToString() + "</size>";
         }
         else
         {
             print("GAME OVER");
             gameResults.text = "GAME OVER\n\n" +
-                                "<size=50>Score: " + StatsManager.score.ToString() + "</size>\n" +
-                                "<size=50>Combo: " + StatsManager.combo.ToString() + "</size>";
-
+                                "<size=50>Max Combo: " + StatsManager.maxCombo.ToString() + "</size>\n" +
+                                "<size=50>Score: " + StatsManager.score.ToString() + "</size>";
         }
 
         StartCoroutine(EndGameRoutine());
