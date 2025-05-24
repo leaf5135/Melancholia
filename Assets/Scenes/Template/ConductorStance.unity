@@ -3082,7 +3082,7 @@ MonoBehaviour:
   songDelayInSeconds: 0
   marginOfError: 0.25
   inputDelayInMilliseconds: 0
-  fileLocation: testC.mid
+  fileLocation: test.mid
   noteTime: 1
 --- !u!4 &1787680573
 Transform:
@@ -3109,7 +3109,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fe4a7e70c1b1b4b43ba35a3ebd577660, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2fbd269cdf7e646ceaf325901f51fe0c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
