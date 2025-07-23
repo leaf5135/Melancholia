@@ -470,16 +470,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fe4a7e70c1b1b4b43ba35a3ebd577660, type: 3}
   - {fileID: 8300000, guid: 9131459029d6141709ea41e3066d57b7, type: 3}
   levels:
-  - one
-  - two
-  - three
-  - four
-  - five
-  - six
-  - seven
-  - eight
-  - nine
-  - ten
+  - 'Level One: Ode to Joy'
+  - 'Level Two: Nocturne Op. 9 No. 2'
+  - "Level Three: F\xFCr Elise"
+  - 'Level Four: Eine kleine Nachtmusik'
+  - 'Level Five: Dance of the Sugar Plum Fairy'
+  - 'Level Six: Clair de Lune'
+  - 'Level Seven: Passacaglia'
+  - 'Level Eight: Winter Wind'
+  - 'Level Nine: March'
+  - 'Level Ten: Canon in D'
   spriteRenderer: {fileID: 1184810036}
   audioSource: {fileID: 506328043}
   levelText: {fileID: 1280619879}
@@ -1113,7 +1113,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -77}
-  m_SizeDelta: {x: 200, y: 5}
+  m_SizeDelta: {x: 500, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1280619878
 CanvasRenderer:
