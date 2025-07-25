@@ -23,11 +23,11 @@ public class StatsManager : MonoBehaviour
     public static float health;
     public static bool gameOver;
     public static float meter;
-    public static bool isMeterFull = false;
+    public static bool isMeterFull;
 
     private bool shieldActive;
-    private int shieldTimeRemaining = 0;
-    private bool flash = false;
+    private int shieldTimeRemaining;
+    private bool flash;
 
     void Start()
     {
@@ -38,6 +38,9 @@ public class StatsManager : MonoBehaviour
         meter = 0;
         health = Instance.healthBar.getMaxHealth();
         gameOver = false;
+        isMeterFull = false;
+        shieldTimeRemaining = 0;
+        flash = false;
         ActivateShield(3);
     }
 
