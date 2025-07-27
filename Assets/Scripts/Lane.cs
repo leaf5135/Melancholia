@@ -17,6 +17,7 @@ public class Lane : MonoBehaviour
     public float despawnOffset;
     public float noteSpawnY;
     public float noteTapY;
+
     public float noteDespawnY
     {
         get
@@ -24,8 +25,10 @@ public class Lane : MonoBehaviour
             return noteTapY - (noteSpawnY - noteTapY) + despawnOffset;
         }
     }
+
     public float noteSpawnX;
     public float noteTapX;
+
     public float noteDespawnX
     {
         get
@@ -33,13 +36,21 @@ public class Lane : MonoBehaviour
             return noteTapX - (noteSpawnX - noteTapX) + despawnOffset;
         }
     }
+
     public int direction;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Initializes the Instance reference when the object starts.
+    /// </summary>
     void Start()
     {
         Instance = this;
     }
+
+    /// <summary>
+    /// Sets timestamps for notes matching the lane's note restriction from a MIDI note array.
+    /// </summary>
+    /// <param name="array">Array of MIDI notes.</param>
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
         foreach (var note in array)
@@ -51,13 +62,19 @@ public class Lane : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
+
+    /// <summary>
+    /// Called every frame to handle note spawning and input detection.
+    /// </summary>
     void Update()
     {
         HandleNoteSpawning();
         HandleNoteInput();
     }
 
+    /// <summary>
+    /// Checks if it’s time to spawn a note and spawns it.
+    /// </summary>
     void HandleNoteSpawning()
     {
         if (spawnIndex < timeStamps.Count)
@@ -72,6 +89,9 @@ public class Lane : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Instantiates a note prefab and assigns its spawn time.
+    /// </summary>
     void SpawnNote()
     {
         var note = Instantiate(notePrefab, transform);
@@ -81,6 +101,9 @@ public class Lane : MonoBehaviour
         spawnIndex++;
     }
 
+    /// <summary>
+    /// Detects player input and handles hits or misses accordingly.
+    /// </summary>
     void HandleNoteInput()
     {
         if (inputIndex < timeStamps.Count)
@@ -89,7 +112,7 @@ public class Lane : MonoBehaviour
             double marginOfError = SongManager.Instance.marginOfError;
             double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
 
-            bool hitProcessed = false; // Flag to track if a hit has been processed
+            bool hitProcessed = false;
 
             if (Input.GetKeyDown(input))
             {
@@ -103,33 +126,37 @@ public class Lane : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the logic for a note hit, destroying notes and updating stats.
+    /// </summary>
+    /// <param name="timeStamp">The note’s timestamp.</param>
+    /// <param name="marginOfError">Allowed margin of error.</param>
+    /// <param name="audioTime">Current audio playback time.</param>
     void HandleNoteHit(double timeStamp, double marginOfError, double audioTime)
     {
         double delay = Math.Abs(audioTime - timeStamp);
         if (delay <= marginOfError)
         {
-            // Create a list to store indices of notes to be destroyed
             List<int> notesToDestroy = new List<int>();
 
             for (int i = inputIndex; i < notes.Count; i++)
             {
                 double noteTime = notes[i].assignedTime;
 
-                // Check if the note's time is within the specified range
                 if (Math.Abs(audioTime - noteTime) <= 0.25)
                 {
                     notesToDestroy.Add(i);
                 }
                 else
                 {
-                    break; // Exit the loop if we're outside the timestamp range
+                    break;
                 }
             }
 
-            // Destroy notes within the range
             foreach (int index in notesToDestroy)
             {
-                try {
+                try
+                {
                     Destroy(notes[index].gameObject);
                 }
                 catch (MissingReferenceException ex)
@@ -138,47 +165,63 @@ public class Lane : MonoBehaviour
                 }
             }
 
-            // Update the inputIndex to the next unprocessed note
             inputIndex = Mathf.Max(inputIndex, notesToDestroy.Count);
             Hit();
-            // print($"Hit on {inputIndex} note");
         }
         else
         {
-            if (delay <= 2 * marginOfError) // Register as an inaccurate hit
+            if (delay <= 2 * marginOfError)
             {
                 InaccurateHit();
-                // print($"Hit inaccurate on {inputIndex} note with {delay} delay");
             }
-            else // Anything outside the margin of error range is a miss
+            else
             {
                 HandleNoteMiss(timeStamp, marginOfError, audioTime);
             }
         }
     }
+
+    /// <summary>
+    /// Handles the logic for a missed note, destroying it and updating stats.
+    /// </summary>
+    /// <param name="timeStamp">The note’s timestamp.</param>
+    /// <param name="marginOfError">Allowed margin of error.</param>
+    /// <param name="audioTime">Current audio playback time.</param>
     void HandleNoteMiss(double timeStamp, double marginOfError, double audioTime)
     {
         try
         {
-            if (timeStamp + marginOfError <= audioTime) {
+            if (timeStamp + marginOfError <= audioTime)
+            {
                 Destroy(notes[inputIndex++].gameObject);
             }
             Miss();
-            // print($"Missed {inputIndex} note");
         }
         catch (MissingReferenceException ex)
         {
             print($"Skipped a deleted note: {ex.Message}");
         }
-
     }
+
+    /// <summary>
+    /// Registers a successful hit with the stats manager.
+    /// </summary>
     private void Hit()
     {
         StatsManager.Hit();
     }
-    private void InaccurateHit() {
+
+    /// <summary>
+    /// Registers an inaccurate hit with the stats manager.
+    /// </summary>
+    private void InaccurateHit()
+    {
         StatsManager.InaccurateHit();
     }
+
+    /// <summary>
+    /// Registers a miss with the stats manager.
+    /// </summary>
     private void Miss()
     {
         StatsManager.Miss();
