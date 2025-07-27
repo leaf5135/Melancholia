@@ -14,14 +14,15 @@ public class SongManager : MonoBehaviour
     public Lane[] lanes;
     public float songDelayInSeconds;
     public double marginOfError; // in seconds
-
     public int inputDelayInMilliseconds;
-
     public string fileLocation;
     public float noteTime;
     public static bool songFinished;
     public static MidiFile midiFile;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Initializes the SongManager, reads MIDI file from either local or remote location.
+    /// </summary>
     void Start()
     {
         Instance = this;
@@ -36,6 +37,9 @@ public class SongManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reads a MIDI file from a URL and initializes note data.
+    /// </summary>
     private IEnumerator ReadFromWebsite()
     {
         using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + fileLocation))
@@ -58,11 +62,18 @@ public class SongManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reads a MIDI file from the local file system and initializes note data.
+    /// </summary>
     private void ReadFromFile()
     {
         midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + fileLocation);
         GetDataFromMidi();
     }
+
+    /// <summary>
+    /// Extracts note data from the MIDI file and distributes it to lanes.
+    /// </summary>
     public void GetDataFromMidi()
     {
         var notes = midiFile.GetNotes();
@@ -73,21 +84,36 @@ public class SongManager : MonoBehaviour
 
         Invoke(nameof(StartSong), songDelayInSeconds);
     }
+
+    /// <summary>
+    /// Begins audio playback after MIDI data is prepared.
+    /// </summary>
     public void StartSong()
     {
         audioSource.Play();
         print("song length: " + audioSource.clip.length);
     }
+
+    /// <summary>
+    /// Returns the current time of the audio source in seconds.
+    /// </summary>
     public static double GetAudioSourceTime()
     {
         return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
     }
 
+    /// <summary>
+    /// Pauses or resumes audio playback depending on game pause state.
+    /// Ends the song when the clip finishes playing.
+    /// </summary>
     void Update()
     {
-        if (Pause.isPaused) {
+        if (Pause.isPaused)
+        {
             audioSource.Pause();
-        } else {
+        }
+        else
+        {
             audioSource.UnPause();
         }
 
