@@ -29,6 +29,9 @@ public class StatsManager : MonoBehaviour
     private int shieldTimeRemaining;
     private bool flash;
 
+    /// <summary>
+    /// Initializes game stats and activates the shield at game start.
+    /// </summary>
     void Start()
     {
         Instance = this;
@@ -44,11 +47,19 @@ public class StatsManager : MonoBehaviour
         ActivateShield(3);
     }
 
+    /// <summary>
+    /// Triggers the shield coroutine with a specified duration.
+    /// </summary>
+    /// <param name="duration">Shield active time in seconds.</param>
     public void ActivateShield(int duration)
     {
         StartCoroutine(ShieldCoroutine(duration));
     }
 
+    /// <summary>
+    /// Coroutine for managing shield duration and visual flashing.
+    /// </summary>
+    /// <param name="duration">Shield active time in seconds.</param>
     private IEnumerator ShieldCoroutine(int duration)
     {
         shieldActive = true;
@@ -70,6 +81,9 @@ public class StatsManager : MonoBehaviour
         meterText.color = Color.white;
     }
 
+    /// <summary>
+    /// Called when a note is hit. Increases score, combo, and meter. Recovers health.
+    /// </summary>
     public static void Hit()
     {
         if (gameOver) return;
@@ -97,6 +111,9 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when an inaccurate note is hit. Reduces health unless shield is active.
+    /// </summary>
     public static void InaccurateHit()
     {
         if (gameOver || Instance.shieldActive) return;
@@ -113,6 +130,9 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when a note is missed. Heavily reduces health and resets combo.
+    /// </summary>
     public static void Miss()
     {
         if (gameOver || Instance.shieldActive) return;
@@ -130,6 +150,9 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates UI elements every frame, handles shield activation via key input.
+    /// </summary>
     private void Update()
     {
         scoreText.text = "Score: " + score.ToString();
@@ -157,7 +180,7 @@ public class StatsManager : MonoBehaviour
             comboText.color = flash ? flashDim : flashLit;
             hpText.color = flash ? flashDim : flashLit;
             meterText.color = flash ? flashDim : flashLit;
-            meterText.text = "SHIELD: " + shieldTimeRemaining + "s";;
+            meterText.text = "SHIELD: " + shieldTimeRemaining + "s";
         }
     }
 }
