@@ -12,13 +12,17 @@ public class Pause : MonoBehaviour
     public TextMeshProUGUI gameResults;
     public static bool isPaused;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Starts with unpaused gameplay.
+    /// </summary>
     void Start()
     {
         ResumeGame();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Handles pause/resume input and triggers end game when conditions are met.
+    /// </summary>
     void Update()
     {
         if (StatsManager.gameOver)
@@ -42,6 +46,9 @@ public class Pause : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resumes gameplay by enabling UI and unpausing time.
+    /// </summary>
     public void ResumeGame()
     {
         isPaused = false;
@@ -51,6 +58,9 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    /// <summary>
+    /// Pauses gameplay by disabling UI and stopping time.
+    /// </summary>
     public void PauseGame()
     {
         isPaused = true;
@@ -60,18 +70,28 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    /// <summary>
+    /// Restarts the current scene and resumes gameplay.
+    /// </summary>
     public void RestartGame()
     {
         ResumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    /// <summary>
+    /// Returns the player to the home screen and resumes gameplay.
+    /// </summary>
     public void ReturnHome()
     {
         ResumeGame();
         SceneManager.LoadScene("Home");
     }
 
+    /// <summary>
+    /// Displays game over or win results and starts the end game routine.
+    /// </summary>
+    /// <param name="win">Whether the level was completed successfully.</param>
     public void EndGame(bool win)
     {
         if (win)
@@ -92,6 +112,9 @@ public class Pause : MonoBehaviour
         StartCoroutine(EndGameRoutine());
     }
 
+    /// <summary>
+    /// Coroutine that displays the game over menu after a brief delay and pauses the game.
+    /// </summary>
     private IEnumerator EndGameRoutine()
     {
         isPaused = true;
