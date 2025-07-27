@@ -15,6 +15,9 @@ public class LevelSelect : MonoBehaviour
 
     private int selectedLevel;
 
+    /// <summary>
+    /// Initializes the level select screen, sets the first album, audio clip, and plays the audio.
+    /// </summary>
     void Start()
     {
         print("levels count: " + levels.Count);
@@ -31,29 +34,43 @@ public class LevelSelect : MonoBehaviour
         }
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+    /// <summary>
+    /// Checks for user input every frame to navigate between songs, play selected level, or go back to home.
+    /// Updates the displayed level text.
+    /// </summary>
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             SceneManager.LoadScene("Home");
         }
 
-        if (albums.Count <= 0 || clips.Count <= 0 || levels.Count <= 0) {
+        if (albums.Count <= 0 || clips.Count <= 0 || levels.Count <= 0)
+        {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
             nextSong();
         }
-        else if (Input.GetKeyDown(KeyCode.Z)) {
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
             backSong();
         }
-        else if (Input.GetKeyDown(KeyCode.Space)) {
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
             PlayGame();
         }
 
         levelText.text = levels[selectedLevel];
     }
 
-    public void nextSong() {
+    /// <summary>
+    /// Advances to the next song/level, updates the displayed album and plays the corresponding audio clip.
+    /// </summary>
+    public void nextSong()
+    {
         selectedLevel = (selectedLevel + 1) % levels.Count;
         spriteRenderer.sprite = albums[selectedLevel];
         audioSource.clip = clips[selectedLevel];
@@ -62,7 +79,11 @@ public class LevelSelect : MonoBehaviour
         audioSource.Play();
     }
 
-    public void backSong() {
+    /// <summary>
+    /// Moves back to the previous song/level, updates the displayed album and plays the corresponding audio clip.
+    /// </summary>
+    public void backSong()
+    {
         selectedLevel = (selectedLevel - 1 + levels.Count) % levels.Count;
         spriteRenderer.sprite = albums[selectedLevel];
         audioSource.clip = clips[selectedLevel];
@@ -71,7 +92,11 @@ public class LevelSelect : MonoBehaviour
         audioSource.Play();
     }
 
-    public void PlayGame() {
+    /// <summary>
+    /// Loads the currently selected level's scene.
+    /// </summary>
+    public void PlayGame()
+    {
         string sceneToLoad = "Scenes/Level/" + selectedLevel;
         Debug.Log("Loading scene: " + sceneToLoad);
         SceneManager.LoadScene(sceneToLoad);
