@@ -73,8 +73,17 @@ public class HealthBar : MonoBehaviour
     /// </summary>
     private void updateHealthBar()
     {
+        if (healthBarFill == null || !healthBarFill.gameObject.activeInHierarchy)
+            return;
+
         float targetFillAmount = currentHealth / maxHealth;
-        healthBarFill.DOFillAmount(targetFillAmount, fillSpeed);
-        healthBarFill.DOColor(colorGradient.Evaluate(targetFillAmount), fillSpeed);
+        DOTween.Kill(healthBarFill); // Kill previous tweens on this target to prevent overlap or memory leaks
+        healthBarFill.DOFillAmount(targetFillAmount, fillSpeed).SetTarget(healthBarFill);
+        healthBarFill.DOColor(colorGradient.Evaluate(targetFillAmount), fillSpeed).SetTarget(healthBarFill);
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(healthBarFill);
     }
 }

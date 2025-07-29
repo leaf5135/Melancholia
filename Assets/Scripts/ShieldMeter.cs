@@ -58,9 +58,19 @@ public class ShieldMeter : MonoBehaviour
     /// <summary>
     /// Updates the visual representation of the meter (fill amount and color) based on the current value.
     /// </summary>
-    private void updateMeterValueBar() {
+    private void updateMeterValueBar()
+    {
+        if (meterFill == null || !meterFill.gameObject.activeInHierarchy)
+            return;
+
         float targetFillAmount = currentMeterValue / maxMeterValue;
-        meterFill.DOFillAmount(targetFillAmount, fillSpeed);
-        meterFill.DOColor(colorGradient.Evaluate(targetFillAmount), fillSpeed);
+        DOTween.Kill(meterFill); // Kill previous tweens on this target to prevent overlap or memory leaks
+        meterFill.DOFillAmount(targetFillAmount, fillSpeed).SetTarget(meterFill);
+        meterFill.DOColor(colorGradient.Evaluate(targetFillAmount), fillSpeed).SetTarget(meterFill);
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(meterFill);
     }
 }
