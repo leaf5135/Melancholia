@@ -159,7 +159,7 @@ public class Lane : MonoBehaviour
                 {
                     Destroy(notes[index].gameObject);
                 }
-                catch (MissingReferenceException ex)
+                catch (MissingReferenceException)
                 {
                     print($"Skipped a deleted note");
                 }
