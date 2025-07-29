@@ -96,14 +96,12 @@ public class Pause : MonoBehaviour
     {
         if (win)
         {
-            print("LEVEL COMPLETE");
             gameResults.text = "LEVEL COMPLETE\n\n" +
                                 "<size=50>Max Combo: " + StatsManager.maxCombo.ToString() + "</size>\n" +
                                 "<size=50>Score: " + StatsManager.score.ToString() + "</size>";
         }
         else
         {
-            print("GAME OVER");
             gameResults.text = "GAME OVER\n\n" +
                                 "<size=50>Max Combo: " + StatsManager.maxCombo.ToString() + "</size>\n" +
                                 "<size=50>Score: " + StatsManager.score.ToString() + "</size>";
