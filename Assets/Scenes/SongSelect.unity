@@ -1347,6 +1347,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3903644047445016937, guid: 4b02bdaf90be2304cb079f03e28f1017, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4157471575789801159, guid: 4b02bdaf90be2304cb079f03e28f1017, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
@@ -1363,7 +1367,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelChanger
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7532691471193216076, guid: 4b02bdaf90be2304cb079f03e28f1017, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2523913639606605303, guid: 4b02bdaf90be2304cb079f03e28f1017, type: 3}
+    - {fileID: 3903644047445016937, guid: 4b02bdaf90be2304cb079f03e28f1017, type: 3}
     m_RemovedGameObjects:
     - {fileID: 779160162350718881, guid: 4b02bdaf90be2304cb079f03e28f1017, type: 3}
     m_AddedGameObjects:

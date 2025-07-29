@@ -182,7 +182,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2180473659388415351}
   - component: {fileID: 3903644047445016937}
-  - component: {fileID: 2523913639606605303}
   m_Layer: 0
   m_Name: LevelChanger
   m_TagString: Untagged
@@ -227,20 +226,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2523913639606605303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7532691471193216076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fc46458832045d4ea1279316e3be519, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3903644047445016937}
-  levelToLoad: SongSelect
 --- !u!1 &7980912715476397420
 GameObject:
   m_ObjectHideFlags: 0
