@@ -197,9 +197,9 @@ public class Lane : MonoBehaviour
             }
             Miss();
         }
-        catch (MissingReferenceException ex)
+        catch (MissingReferenceException)
         {
-            print($"Skipped a deleted note: {ex.Message}");
+            print($"Skipped a deleted note");
         }
     }
 

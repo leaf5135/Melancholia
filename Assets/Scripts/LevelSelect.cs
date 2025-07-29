@@ -20,7 +20,6 @@ public class LevelSelect : MonoBehaviour
     /// </summary>
     void Start()
     {
-        print("levels count: " + levels.Count);
         selectedLevel = 0;
 
         // Initialize to the first album and audio clip
@@ -30,7 +29,7 @@ public class LevelSelect : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
             audioSource.clip = clips[0];
             audioSource.Play();
-            Debug.Log($"Playing {audioSource.clip.name}");
+            // Debug.Log($"Playing {audioSource.clip.name}");
         }
     }
 
@@ -75,7 +74,7 @@ public class LevelSelect : MonoBehaviour
         spriteRenderer.sprite = albums[selectedLevel];
         audioSource.clip = clips[selectedLevel];
 
-        Debug.Log($"Playing {audioSource.clip.name}");
+        // Debug.Log($"Playing {audioSource.clip.name}");
         audioSource.Play();
     }
 
@@ -88,7 +87,7 @@ public class LevelSelect : MonoBehaviour
         spriteRenderer.sprite = albums[selectedLevel];
         audioSource.clip = clips[selectedLevel];
 
-        Debug.Log($"Playing {audioSource.clip.name}");
+        // Debug.Log($"Playing {audioSource.clip.name}");
         audioSource.Play();
     }
 
@@ -98,7 +97,7 @@ public class LevelSelect : MonoBehaviour
     public void PlayGame()
     {
         string sceneToLoad = "Scenes/Level/" + selectedLevel;
-        Debug.Log("Loading scene: " + sceneToLoad);
+        // Debug.Log("Loading scene: " + sceneToLoad);
         SceneManager.LoadScene(sceneToLoad);
     }
 }
